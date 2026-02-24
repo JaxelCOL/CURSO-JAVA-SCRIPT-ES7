@@ -101,3 +101,5 @@ console.log(`Balance: ${balance}`);
 console.log(`Estado Financiero: ${getEstadoFinanciero(balance)}`);
 console.log(`Recomendación: ${recomendacion(getEstadoFinanciero(balance))}`);
 console.groupEnd();
+
+a
