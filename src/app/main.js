@@ -1,5 +1,7 @@
 "use strict";
 
+// funcion para conversion
+
 function convertir(valor, from, to) {
 
   // Validar número
@@ -58,9 +60,9 @@ conversor(100, "m", "km");     // 0.10 km
 
 // Errores
 
-conversor("abc", "C", "F");    //  valor inválido
+conversor("abc", "C", "F");    // valor inválido
 conversor(100, "C", "m");      // error categorías
-conversor(100, "mm", "km");    // er unidad no soportada
+conversor(100, "mm", "km");    // unidad no soportada
 conversor("", "C", "F");       // no valor inválido
 conversor(null, "C", "F");     // no valor inválido
 
