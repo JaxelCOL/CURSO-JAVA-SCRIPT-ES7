@@ -40,7 +40,26 @@ function convertir(valor, from, to) {
 }
 
 // Pruebas
-convertir(100, "C", "F");
-convertir(32, "F", "C");
-convertir(1500, "m", "km");
-convertir("abc", "C", "F");
+// Temperatura
+
+conversor(50, "C", "F");        // 122.00 F
+conversor(212, "F", "C");      // 100.00 C
+conversor(-10, "C", "F");      // 14.00 F
+conversor(0, "C", "F");        // 32.00 F
+conversor(-40, "C", "F");      // -40.00 F (caso especial)
+
+// Longitud
+
+conversor(5000, "m", "km");    // 5.00 km
+conversor(0, "m", "km");       // 0.00 km
+conversor(2.75, "km", "m");    // 2750.00 m
+conversor(-5, "km", "m");      // -5000.00 m
+conversor(100, "m", "km");     // 0.10 km
+
+// Errores
+
+conversor("abc", "C", "F");    // error valor inválido
+conversor(100, "C", "m");      // error categorías
+conversor(100, "mm", "km");    // error unidad no soportada
+conversor("", "C", "F");       // error valor inválido
+conversor(null, "C", "F");     // error valor inválido
