@@ -1,26 +1,189 @@
+// A. tipos de datos  typeof
+
+// string, number, boolean, null, undefined, symbol, bigint
+// no primitivos: object, array, function
+
 "use strict";
 
-/* =====================================================
-   EJEMPLOS DE USO: if, for, operadores y tipos
-===================================================== */
+// modo estricto que ayuda a evitar errores comunes
 
-/* 1, IF con comparación estricta (===) */
+const s = "hola mundo"; // string
+const n = 42; // number
+const b = true;
+let u; // undefined valor no asignado
+const nu = null; // null valor intencionalmente vacío
+const big = 9007199254740991n; // bigint para números enteros grandes
+const sym = Symbol("id"); // símbolo para identificadores únicos
+
+console.log(typeof s); // string
+console.log(typeof n); // number
+console.log(typeof b); // boolean
+console.log(typeof u); // undefined
+console.log(typeof nu); // "object" (error histórico de JavaScript)
+console.log(typeof big); // bigint
+console.log(typeof sym); // symbol
+
+// B. let vs const (y porque evitar var)
+
+const x = 10;
+// x = 20; // Error: no se puede reasignar const
+
+const obj = { name: "Alice" };
+obj.name = "Bob"; // Permitido
+
+let y = 10;
+y = 20; // Permitido
+
+function demo() {
+    if (true) {
+        var z = 30;
+    }
+    console.log(z);
+}
+demo();
+
+// C. Conversión de tipos
+
+console.log("m" + 3); 
+console.log("5" - 3); // 2
+console.log(true + 1); // 2 (true se convierte en 1)
+
+const input = "12.5";
+const num = Number(input);
+
+const number = 42;
+const str = String(number);
+
+console.log(num); // 12.5
+console.log(str); // "42"
+
+// Operadores clave
+
+console.log(5 === "5"); // false
+console.log(5 == "5"); // true
+
+console.log(true && true);
+console.log(true && false);
+console.log(false && false);
+
+console.log(true || true);
+console.log(true || false);
+console.log(false || false);
+
+const a = null;
+const c = "default";
+console.log(a ?? c);
+
+console.log(0 || "default");
+
+// D. Template strings 
+
+const ingreso = 5000000;
+const gasto = 450000;
+const balance = ingreso - gasto;
+
+const mensaje = `El balance es: ${balance}`;
+console.log(mensaje);
+
+console.log(`El ingreso es: ${ingreso}, el gasto es: ${gasto}, y el balance es: ${balance}`);
+
+// F. CONTROL DE FLUJO
+
 const edad = 18;
 
-if (edad === 18) {
+if (edad >= 18) {
+    console.log("Eres mayor de edad");
+} else {
+    console.log("Eres menor de edad");
+}
+
+console.log(edad >= 18 ? "Eres mayor de edad" : "Eres menor de edad");
+
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+
+const gastos = [100, 200, 300];
+let totalGastos = 0;
+
+for (let i = 0; i < gastos.length; i++) {
+    totalGastos += gastos[i];
+}
+
+console.log(`Total de gastos: ${totalGastos}`);
+
+let contador = 0;
+while (contador < 5) {
+    console.log(contador);
+    contador++;
+}
+
+// Funciones
+
+function saludar(nombre) {
+    return `Hola, ${nombre}!`;
+}
+
+console.log(saludar("Alice"));
+
+// Manejo básico de errores
+
+try {
+    console.log(dividirConManejo(10, 0));
+} catch (error) {
+    console.error("Ocurrió un error:", error.message);
+}
+
+function dividirConManejo(a, b) {
+  try {
+    if (typeof a !== "number" || typeof b !== "number" || Number.isNaN(a) || Number.isNaN(b)) {
+      throw new Error("Ambos valores deben ser números válidos");
+    }
+
+    if (b === 0) {
+      throw new Error("No se puede dividir por cero");
+    }
+
+    return a / b;
+
+  } catch (error) {
+    console.error("Ocurrió un error:", error.message);
+    return null;
+  }
+}
+
+console.log(dividirConManejo(10, 0));
+console.log(dividirConManejo(10, 2));
+console.log(dividirConManejo("10", 2));
+
+// Depuración
+
+// console.table() imprime objetos en formato tabla
+const report = { ingreso: 5000000, gasto: 450000, balance: 4550000 };
+
+console.table(report);
+
+console.group("Reporte financiero");
+console.log(`Ingreso: ${report.ingreso}`);
+console.log(`Gasto: ${report.gasto}`);
+console.log(`Balance: ${report.balance}`);
+console.groupEnd();
+
+/* ===================================================== */
+
+const edadExacta = 18;
+
+if (edadExacta === 18) {
   console.log("1) Tienes exactamente 18 años");
 }
 
-/* 2. Conversión de texto a número antes de comparar */
 const entrada = "10";
-const numeroConvertido = Number(entrada); // Convertimos string a number
+const numeroConvertido = Number(entrada);
 
 if (numeroConvertido === 10) {
   console.log("2) El número convertido es 10");
 }
 
-/* 3. Uso de AND (&&)
-   Ambas condiciones deben cumplirse */
 const usuario = "Axel";
 const activo = true;
 
@@ -28,52 +191,41 @@ if (usuario === "Axel" && activo === true) {
   console.log("3) Usuario válido y activo");
 }
 
-/* 4. Uso de OR (||)
-   Con que una condición sea verdadera, entra */
 const rol = "admin";
 
 if (rol === "admin" || rol === "superadmin") {
   console.log("4) Tienes permisos especiales");
 }
 
-/* 5. Uso de Nullish (??)
-   Si el valor es null o undefined, usa el valor por defecto */
 const nombre = null;
 const nombreFinal = nombre ?? "Invitado";
 
 console.log("5) Bienvenido", nombreFinal);
 
-/* 6. FOR básico
-   Repite 5 veces desde 0 hasta 4 */
 for (let i = 0; i < 5; i++) {
   console.log("6) Número del ciclo:", i);
 }
 
-/* 7. FOR sumando valores */
 let suma = 0;
 
 for (let i = 1; i <= 5; i++) {
-  suma += i; // suma = suma + i
+  suma += i;
 }
 
 console.log("7) La suma total es:", suma);
 
-/* 8. FOR recorriendo un array */
 const numeros = [10, 20, 30, 40];
 
 for (let i = 0; i < numeros.length; i++) {
   console.log("8) Valor del array:", numeros[i]);
 }
 
-/* 9. IF dentro de un FOR
-   Detectar números pares */
 for (let i = 1; i <= 5; i++) {
-  if (i % 2 === 0) { // Si el residuo es 0, es par
+  if (i % 2 === 0) {
     console.log("9)", i, "es número par");
   }
 }
 
-/* 10. IF con boolean */
 const estaLogueado = true;
 
 if (estaLogueado) {
@@ -82,7 +234,6 @@ if (estaLogueado) {
   console.log("10) Acceso denegado");
 }
 
-/* uno de prueba: Uso de BigInt */
 const numeroGrande = 100n;
 
 if (numeroGrande > 50n) {
